@@ -66,7 +66,7 @@ bucket.getFiles(options)
     	failedLineNo = successLineNo;
     }
 
-    var readStream =bucket.file(files[0].name).createReadStream();
+    var readStream =bucket.file(files[config.BUCKET_FILE_INDEX].name).createReadStream();
 	var interface = lineReader.createInterface({
 	  input: readStream
 	});
@@ -81,7 +81,7 @@ bucket.getFiles(options)
 			//console.log('---------------------'+lineNo+'--------------------');
 			if(lineNo<=400) {
 				var jsonObj = JSON.parse(line);
-				docRef.doc('0-line'+totalLine).set(jsonObj)
+				docRef.doc(config.BUCKET_FILE_INDEX+'-line'+totalLine).set(jsonObj)
 			  	.then(() => { // Document created successfully.			  		
 			  		finishedNo++;		  			
 		  			console.log('success! ', finishedNo);
